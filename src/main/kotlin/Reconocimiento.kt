@@ -1,2 +1,4 @@
-class Reconocimiento {
+class Reconocimiento : Orden{
+    var num = 0
+    
 }
