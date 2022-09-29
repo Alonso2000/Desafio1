@@ -1,6 +1,4 @@
-class Dron(id: Int?, operativo: Boolean?) {
-    var id:Int = 0
-    var operativo:Boolean = true
+class Dron(var id: Int? = null, var operativo: Boolean? = null) {
 
     /*companion object{
         var num:Int= 1
