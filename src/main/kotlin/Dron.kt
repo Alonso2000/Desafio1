@@ -1,4 +1,4 @@
-class Dron(var id: Int? = null, var operativo: Boolean? = null) {
+class Dron(var id: Int? = null, var operativo: Boolean? = true) {
 
     /*companion object{
         var num:Int= 1
@@ -13,7 +13,7 @@ class Dron(var id: Int? = null, var operativo: Boolean? = null) {
         return "Dron(id=$id, operativo=$operativo)"
     }
 
-    class Builder(var id:Int? = null, var operativo:Boolean? = null){
+    class Builder(var id:Int? = null, var operativo:Boolean? = true){
         fun id(id:Int):Builder{
             this.id = id
             return this
