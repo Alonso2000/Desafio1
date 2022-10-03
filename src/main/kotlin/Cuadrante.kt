@@ -7,7 +7,8 @@ class Cuadrante {
         var num:Int= 1
     }
 
-    constructor(){
+    constructor(d:ArrayList<Dron>){
+        this.drones = d
         Cuadrante.num++
     }
 

@@ -1,4 +1,4 @@
-class Tet() {
+class Tet {
     var drones = ArrayList<Dron>()
 
     override fun toString(): String {
