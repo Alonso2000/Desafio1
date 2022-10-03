@@ -32,7 +32,7 @@ fun main() {
             }
         }
 
-        println()
+        println("******************************************")
 
         if (segundos % 10 == 0) {
             for(i in tierra.parrilla.indices){
@@ -51,7 +51,7 @@ fun main() {
             }
         }
 
-        println()
+        println("******************************************")
 
         if (segundos % 20 == 0) {
             var reparado:Boolean = false
@@ -65,6 +65,7 @@ fun main() {
                                 if(tierra.parrilla[i][j].dron.id == elemento.num){
                                     tierra.parrilla[i][j].dron.operativo = true
                                     println("EL DRON DEL SECTOR[$i][$j] A SIDO REPARADO")
+                                    tet.ordenesCumplidas.add(elemento)
                                 }
                             }
                         }
@@ -76,17 +77,26 @@ fun main() {
                                     if(tet.drones.isNotEmpty()){
                                         tierra.parrilla[i][j].dron = Factoria.crearDron()
                                         println("SUSTITUIMOS EL DRON DEL SECTOR[$i][$j]")
+                                        tet.ordenesCumplidas.add(elemento)
                                     }else{
                                         tierra.parrilla[i][j].dron.id = null
                                         tierra.parrilla[i][j].dron.operativo = null
                                         println("NO HAY MAS DRONES EN EL TET EL SECTOR[$i][$j] SE QUEDA SIN DRON")
+                                        tet.ordenesCumplidas.add(elemento)
                                     }
                                 }
                             }
                         }
                     }
+                }else if(elemento is Reconocimiento) {
+                    var areas = Array<String>(2) { "Animales"; "Vegetales"; "Radiacion" }
+                    var num: Int = Random.nextInt(areas.size)
+                    elemento.area = areas[num]
+                    println("ASIGNADA AREA A LA ORDEN DE RECONOCIMIENTO ${elemento.num}")
+                    tet.ordenesCumplidas.add(elemento)
                 }
             }
+            ordenesPendientes.clear()
         }
         segundos++
         Thread.sleep(1000)
