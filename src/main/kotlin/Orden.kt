@@ -1,5 +1,6 @@
 import java.time.LocalDate
 
+//ME QUEDA EN EL PENSAMIENTO QUE ESTA CLASE DEBERIA DE SER ABSTRACTA PERO NO ESTOY MUY SEGURO
 open class Orden(var fecha: LocalDate? = null, var completado: Boolean? = null, var fila: Int? = null, var columna: Int? = null) {
 
     override fun toString(): String {

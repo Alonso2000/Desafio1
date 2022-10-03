@@ -7,7 +7,7 @@ fun main() {
     var ordenesPendientes = ArrayList<Orden>()
 
     //AÑADO LOS DRONES AL TET
-    for (i in 0..100){
+    for (i in 1..100){
         var dron:Dron = Factoria.crearDron()
         tet.anadirDrones(dron)
     }
@@ -16,6 +16,11 @@ fun main() {
     Factoria.crearCuadrante(tet, tierra)
     var segundos = 1
     //EMPIEZA LA SIMULACION
+    for (i in tierra.parrilla.indices){
+        for(j in tierra.parrilla.indices){
+            println(tierra.parrilla[i][j])
+        }
+    }
     do{
         //CADA VEZ QUE PASAN 4 SEGUNDOS RECORRO LA PARRILLA DE LA TIERRA Y ROMPE DRONES SI TOCA UN NUMERO <= A 20 O >= A 0
         if (segundos % 4 == 0) {
@@ -79,7 +84,8 @@ fun main() {
                             for (j in tierra.parrilla[i].indices) {
                                 if(tierra.parrilla[i][j].dron.id == elemento.num){
                                     if(tet.drones.isNotEmpty()){
-                                        tierra.parrilla[i][j].dron = Factoria.crearDron()
+                                        tierra.parrilla[i][j].dron = tet.drones[0]
+                                        tet.drones.removeAt(0)
                                         println("SUSTITUIMOS EL DRON DEL SECTOR[$i][$j]")
                                         elemento.completado = false
                                         tet.ordenesCumplidas.add(elemento)
@@ -113,6 +119,11 @@ fun main() {
             println("*****************************************************************")
             var total:Int = tet.totalOrdenesCumplidas()
             println("EL NUMERO TOTAL DE ORDENES COMPLETADAS SON $total")
+            for (i in tierra.parrilla.indices){
+                for(j in tierra.parrilla.indices){
+                    println(tierra.parrilla[i][j])
+                }
+            }
         }
         segundos++
         Thread.sleep(1000)
