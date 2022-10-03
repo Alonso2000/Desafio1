@@ -1,6 +1,11 @@
 import kotlin.random.Random
 
 fun main() {
+    /**************************************************************
+    ENLACE AL REPOSITORIO DE GITHUB:
+    https://github.com/Alonso2000/Desafio1
+     **************************************************************/
+
     //CREO LA TIERRA Y EL TET
     var tierra:Tierra = Factoria.crearTierra()
     var tet:Tet = Tet()
