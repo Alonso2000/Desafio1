@@ -3,6 +3,9 @@ class Cuadrante {
     var vika:String = "Vika"
     var jack:String = "Jack"
 
+    constructor(){
+
+    }
     constructor(d:Dron){
         this.dron = d
     }

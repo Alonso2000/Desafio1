@@ -1,11 +1,9 @@
 import kotlin.random.Random
 
 object Factoria {
-    fun crearDron(tet:Tet){
-        for(i in 0..100){
-            var d: Dron = Dron.Builder().operativo(true).build()
-            tet.drones.add(d)
-        }
+    fun crearDron():Dron{
+        var d: Dron = Dron.Builder().operativo(true).build()
+        return d
     }
 
     fun crearTierra():Tierra{
