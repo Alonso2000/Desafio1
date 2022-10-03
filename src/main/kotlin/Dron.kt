@@ -1,19 +1,9 @@
 class Dron(var id: Int? = null, var operativo: Boolean? = true) {
-
-    /*companion object{
-        var num:Int= 1
-    }*/
-
-    /*constructor(op:Boolean){
-        this.operativo = op
-        Dron.num++
-    }*/
-
     override fun toString(): String {
         return "Dron(id=$id, operativo=$operativo)"
     }
 
-    class Builder(var id:Int? = null, var operativo:Boolean? = true){
+    class Builder(var id:Int? = num, var operativo:Boolean? = true){
         fun id(id:Int):Builder{
             this.id = id
             return this
@@ -25,7 +15,11 @@ class Dron(var id: Int? = null, var operativo: Boolean? = true) {
         }
 
         fun build():Dron{
+            Dron.num++
             return Dron(id,operativo)
         }
+    }
+    companion object{
+        var num:Int= 1
     }
 }
