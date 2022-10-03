@@ -26,26 +26,68 @@ fun main() {
                     var estropeado:Int = Random.nextInt(0,100)
                     if(estropeado in 0..20){
                         tierra.parrilla[i][j].dron.operativo = false
+                        println("EL DRON DEL SECTOR[$i][$j] SE A ROTO")
                     }
                 }
             }
         }
+
         println()
+
         if (segundos % 10 == 0) {
             for(i in tierra.parrilla.indices){
                 for(j in tierra.parrilla[i].indices){
                     if(tierra.parrilla[i][j].dron.operativo == false){
                         var rep = Factoria.crearOrdenReparacion(tierra.parrilla[i][j].dron.id)
                         ordenesPendientes.add(rep)
+                        println("HAN SIDO ENCONTRADOS DRONES ROTOS, AÑADIENDO ORDENES DE REPARACION...")
                     }
                 }
             }
             for(i in 0..5){
                 var rec = Factoria.crearOrdenReconocimiento()
                 ordenesPendientes.add(rec)
+                println("AÑADIENDO ORDENES DE RECONOCIMIENTO...")
             }
         }
-        println(ordenesPendientes)
+
+        println()
+
+        if (segundos % 20 == 0) {
+            var reparado:Boolean = false
+            for(elemento in ordenesPendientes){
+                if(elemento is Reparacion){
+                    reparado = elemento.reparar()
+                    if(reparado == true){
+                        elemento.estadoDespues = "Reparado"
+                        for(i in tierra.parrilla.indices) {
+                            for (j in tierra.parrilla[i].indices) {
+                                if(tierra.parrilla[i][j].dron.id == elemento.num){
+                                    tierra.parrilla[i][j].dron.operativo = true
+                                    println("EL DRON DEL SECTOR[$i][$j] A SIDO REPARADO")
+                                }
+                            }
+                        }
+                    }else{
+                        elemento.estadoDespues = "Irreparable"
+                        for(i in tierra.parrilla.indices) {
+                            for (j in tierra.parrilla[i].indices) {
+                                if(tierra.parrilla[i][j].dron.id == elemento.num){
+                                    if(tet.drones.isNotEmpty()){
+                                        tierra.parrilla[i][j].dron = Factoria.crearDron()
+                                        println("SUSTITUIMOS EL DRON DEL SECTOR[$i][$j]")
+                                    }else{
+                                        tierra.parrilla[i][j].dron.id = null
+                                        tierra.parrilla[i][j].dron.operativo = null
+                                        println("NO HAY MAS DRONES EN EL TET EL SECTOR[$i][$j] SE QUEDA SIN DRON")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         segundos++
         Thread.sleep(1000)
     }while(segundos < 100)
