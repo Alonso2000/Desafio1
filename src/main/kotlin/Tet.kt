@@ -6,7 +6,9 @@ class Tet {
         this.drones.add(d)
     }
 
+    fun resumenOrden()String{
 
+    }
     override fun toString(): String {
         return "Tet(drones=$drones)"
     }

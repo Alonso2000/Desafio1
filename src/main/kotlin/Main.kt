@@ -1,25 +1,23 @@
 import kotlin.random.Random
 
 fun main() {
+    //CREO LA TIERRA Y EL TET
     var tierra:Tierra = Factoria.crearTierra()
     var tet:Tet = Tet()
     var ordenesPendientes = ArrayList<Orden>()
 
+    //AÑADO LOS DRONES AL TET
     for (i in 0..100){
         var dron:Dron = Factoria.crearDron()
         tet.anadirDrones(dron)
     }
 
+    //CREA LOS CUADRANTES
     Factoria.crearCuadrante(tet, tierra)
     var segundos = 1
+    //EMPIEZA LA SIMULACION
     do{
-        /*for(i in tierra.parrilla.indices){
-            for(j in tierra.parrilla[i].indices) {
-                print("${tierra.parrilla[i][j]} ")
-            }
-            println()
-        }*/
-
+        //CADA VEZ QUE PASAN 4 SEGUNDOS RECORRO LA PARRILLA DE LA TIERRA Y ROMPE DRONES SI TOCA UN NUMERO <= A 20 O >= A 0
         if (segundos % 4 == 0) {
             for(i in tierra.parrilla.indices){
                 for(j in tierra.parrilla[i].indices){
@@ -32,8 +30,9 @@ fun main() {
             }
         }
 
-        println("******************************************")
+        println("*****************************************************************")
 
+        //CADA VEZ QUE PASAN 10 SEGUNDOS RECORRE LA PARRILLA DE LA TIERRA Y CREA LA ORDEN DE REPARACION Y LA AÑADE AL ARRAYLIST DE ORDENES PENDIENTES
         if (segundos % 10 == 0) {
             for(i in tierra.parrilla.indices){
                 for(j in tierra.parrilla[i].indices){
@@ -44,6 +43,7 @@ fun main() {
                     }
                 }
             }
+            //TAMBIEN CREA 5 ORDENES DE RECONOCIMIENTO Y LAS AÑADE A LAS ORDENES PENDIENTES
             for(i in 0..5){
                 var rec = Factoria.crearOrdenReconocimiento()
                 ordenesPendientes.add(rec)
@@ -53,6 +53,8 @@ fun main() {
 
         println("******************************************")
 
+        /*CADA VEZ QUE PASAN 20 SEGUNDOS RECORRE EL ARRAYLIST Y DEPENDIENDO DEL TIPO DE ORDEN HACE UNA COSA O OTRA SI ES DE REPARACION REPARA LOS DRONES ROTOS
+        Y LO AÑADE A UNA LISTA DE ORDENES REPARADAS*/
         if (segundos % 20 == 0) {
             var reparado:Boolean = false
             for(elemento in ordenesPendientes){
@@ -70,6 +72,7 @@ fun main() {
                             }
                         }
                     }else{
+                        //SI EL DRON ES IRREPARABLE LO SUSTITUYE COJIENDO OTRO DEL ARRAYLIST DE DRONES DEL TET SI NO HAY MAS ESE CUADRANTE SE QUEDA SIN DRON
                         elemento.estadoDespues = "Irreparable"
                         for(i in tierra.parrilla.indices) {
                             for (j in tierra.parrilla[i].indices) {
@@ -88,6 +91,7 @@ fun main() {
                             }
                         }
                     }
+                    //SI ES DE RECONOCIMIENTO ASIGNA UN TIPO DE AREA A LA ORDEN DE RECONOCIMIENTO
                 }else if(elemento is Reconocimiento) {
                     var areas = Array<String>(2) { "Animales"; "Vegetales"; "Radiacion" }
                     var num: Int = Random.nextInt(areas.size)
