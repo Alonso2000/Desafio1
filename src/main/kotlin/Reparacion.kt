@@ -1,17 +1,27 @@
-import java.time.LocalDate
-
-class Reparacion : Orden {
-    var num: Int = 0
-    var estadoDespues: Boolean = false
-    var estadoAntes: Boolean = false
-
-    constructor(f: LocalDate, c: Boolean, fil: Int, col: Int, n: Int, ed: Boolean, ea: Boolean) : super(f, c, fil, col) {
-        this.num = n
-        this.estadoDespues = ed
-        this.estadoAntes = ea
-    }
+class Reparacion(var num:Int? = null, var estadoDespues:Boolean? = null, var estadoAntes:Boolean? = null) : Orden() {
 
     override fun toString(): String {
         return "Reparacion(num=$num, estadoDespues=$estadoDespues, estadoAntes=$estadoAntes)"
+    }
+
+    class Builder(var num:Int? = null, var estadoDespues:Boolean? = null, var estadoAntes:Boolean? = null){
+        fun num(num:Int):Builder{
+            this.num = num
+            return this
+        }
+
+        fun estadoDespues(estadoDespues: Boolean):Builder{
+            this.estadoDespues = estadoDespues
+            return this
+        }
+
+        fun estadoAntes(estadoAntes: Boolean):Builder{
+            this.estadoAntes = estadoAntes
+            return this
+        }
+
+        fun build(): Orden {
+            return Reparacion(num, estadoDespues, estadoAntes)
+        }
     }
 }

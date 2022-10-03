@@ -1,18 +1,34 @@
 import java.time.LocalDate
 
-open class Orden {
-    var fecha: LocalDate? = LocalDate.now()
-    var completado:Boolean = false
-    var fila:Int = 0
-    var columna:Int = 0
+open class Orden(var fecha: LocalDate? = null, var completado: Boolean? = null, var fila: Int? = null, var columna: Int? = null) {
 
-    constructor(f:LocalDate, c:Boolean, fil:Int, col:Int){
-        this.fecha = f
-        this.completado = c
-        this.fila = fil
-        this.columna = col
-    }
     override fun toString(): String {
         return "Orden(fecha=$fecha, completado=$completado, fila=$fila, columna=$columna)"
+    }
+
+    class Builder(var fecha:LocalDate? = null, var completado:Boolean? = null, var fila:Int? = null, var columna:Int? = null){
+        fun fecha(fecha:LocalDate):Builder{
+            this.fecha = fecha
+            return this
+        }
+
+        fun completado(completado: Boolean):Builder{
+            this.completado = completado
+            return this
+        }
+
+        fun fila(fila: Int):Builder{
+            this.fila = fila
+            return this
+        }
+
+        fun columna(columna: Int):Builder{
+            this.columna = columna
+            return this
+        }
+
+        fun build(): Orden {
+            return Orden(fecha, completado, fila, columna)
+        }
     }
 }
