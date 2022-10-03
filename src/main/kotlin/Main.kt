@@ -51,7 +51,7 @@ fun main() {
             }
         }
 
-        println("******************************************")
+        println("*****************************************************************")
 
         /*CADA VEZ QUE PASAN 20 SEGUNDOS RECORRE EL ARRAYLIST Y DEPENDIENDO DEL TIPO DE ORDEN HACE UNA COSA O OTRA SI ES DE REPARACION REPARA LOS DRONES ROTOS
         Y LO AÑADE A UNA LISTA DE ORDENES REPARADAS*/
@@ -67,6 +67,7 @@ fun main() {
                                 if(tierra.parrilla[i][j].dron.id == elemento.num){
                                     tierra.parrilla[i][j].dron.operativo = true
                                     println("EL DRON DEL SECTOR[$i][$j] A SIDO REPARADO")
+                                    elemento.completado = true
                                     tet.ordenesCumplidas.add(elemento)
                                 }
                             }
@@ -80,11 +81,13 @@ fun main() {
                                     if(tet.drones.isNotEmpty()){
                                         tierra.parrilla[i][j].dron = Factoria.crearDron()
                                         println("SUSTITUIMOS EL DRON DEL SECTOR[$i][$j]")
+                                        elemento.completado = false
                                         tet.ordenesCumplidas.add(elemento)
                                     }else{
                                         tierra.parrilla[i][j].dron.id = null
                                         tierra.parrilla[i][j].dron.operativo = null
                                         println("NO HAY MAS DRONES EN EL TET EL SECTOR[$i][$j] SE QUEDA SIN DRON")
+                                        elemento.completado = true
                                         tet.ordenesCumplidas.add(elemento)
                                     }
                                 }
@@ -93,14 +96,23 @@ fun main() {
                     }
                     //SI ES DE RECONOCIMIENTO ASIGNA UN TIPO DE AREA A LA ORDEN DE RECONOCIMIENTO
                 }else if(elemento is Reconocimiento) {
-                    var areas = Array<String>(2) { "Animales"; "Vegetales"; "Radiacion" }
+                    var areas = ArrayList<String>()
+                    areas.add("Animales")
+                    areas.add("Vegetales")
+                    areas.add("Radiacion")
                     var num: Int = Random.nextInt(areas.size)
                     elemento.area = areas[num]
                     println("ASIGNADA AREA A LA ORDEN DE RECONOCIMIENTO ${elemento.num}")
+                    elemento.completado = true
                     tet.ordenesCumplidas.add(elemento)
                 }
             }
+            println("*****************************************************************")
             ordenesPendientes.clear()
+            tet.resumenOrden()
+            println("*****************************************************************")
+            var total:Int = tet.totalOrdenesCumplidas()
+            println("EL NUMERO TOTAL DE ORDENES COMPLETADAS SON $total")
         }
         segundos++
         Thread.sleep(1000)
