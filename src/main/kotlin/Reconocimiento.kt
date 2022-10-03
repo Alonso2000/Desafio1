@@ -15,7 +15,7 @@ class Reconocimiento(var num:Int? = null, var area:String? = null) : Orden() {
             return this
         }
 
-        fun build(): Orden {
+        fun build(): Reconocimiento {
             return Reconocimiento(num, area)
         }
     }
