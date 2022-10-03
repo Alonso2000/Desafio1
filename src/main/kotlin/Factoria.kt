@@ -16,8 +16,8 @@ object Factoria {
             for(j in tierra.parrilla[i].indices){
                 var cuadrante:Cuadrante = Cuadrante(tet.drones[0])
                 tet.drones.removeAt(0)
-                cuadrante.jack = "Jack$i$j"
-                cuadrante.vika = "Vika$i$j"
+                cuadrante.jack = "Jack[$i][$j]"
+                cuadrante.vika = "Vika[$i][$j]"
                 tierra.parrilla[i][j] = cuadrante
             }
         }
