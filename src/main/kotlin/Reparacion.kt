@@ -1,26 +1,26 @@
-class Reparacion(var num:Int? = null, var estadoDespues:Boolean? = null, var estadoAntes:Boolean? = null) : Orden() {
+class Reparacion(var num:Int? = null, var estadoDespues:String? = null, var estadoAntes:String? = null) : Orden() {
 
     override fun toString(): String {
         return "Reparacion(num=$num, estadoDespues=$estadoDespues, estadoAntes=$estadoAntes)"
     }
 
-    class Builder(var num:Int? = null, var estadoDespues:Boolean? = null, var estadoAntes:Boolean? = null){
-        fun num(num:Int):Builder{
+    class Builder(var num:Int? = null, var estadoDespues:String? = null, var estadoAntes:String? = null){
+        fun num(num: Int?):Builder{
             this.num = num
             return this
         }
 
-        fun estadoDespues(estadoDespues: Boolean):Builder{
+        fun estadoDespues(estadoDespues: String):Builder{
             this.estadoDespues = estadoDespues
             return this
         }
 
-        fun estadoAntes(estadoAntes: Boolean):Builder{
+        fun estadoAntes(estadoAntes: String):Builder{
             this.estadoAntes = estadoAntes
             return this
         }
 
-        fun build(): Orden {
+        fun build(): Reparacion {
             return Reparacion(num, estadoDespues, estadoAntes)
         }
     }

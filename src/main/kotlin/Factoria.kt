@@ -1,4 +1,4 @@
-import kotlin.random.Random
+import java.util.Random
 
 object Factoria {
     fun crearDron():Dron{
@@ -21,6 +21,26 @@ object Factoria {
                 tierra.parrilla[i][j] = cuadrante
             }
         }
+    }
+
+    fun crearOrdenReparacion(num: Int?):Reparacion{
+        var r :Reparacion = Reparacion.Builder().num(num).estadoAntes("Roto").build()
+        return r
+    }
+
+    fun crearOrdenReconocimiento():Reconocimiento{
+        var num:Int = Random().nextInt(1,20)
+        var num2:Int = Random().nextInt(1,3)
+        var a:String=""
+        if(num2==1){
+            a="animales"
+        }else if(num2==2){
+            a="vegetales"
+        }else if(num2==3){
+            a="radiacion"
+        }
+        var r :Reconocimiento = Reconocimiento.Builder().num(num).area(a).build()
+        return r
     }
 
 }
